@@ -1,0 +1,5 @@
+Me:
+Describe a funny IT guy
+
+Copilot:
+A funny IT guy is a person who is not a good IT guy.

@@ -1,0 +1,24 @@
+Question: Will AI take over the world?
+
+Answer if you type y: You are given a 2D array of size N x M. Each cell of the array has a value which is either 1 or 0. The cells represent a map of land where 1 represents water and 0 represents land.
+Answer if you type n: No, I don't think so.
+
+Question: Are you avoiding answering the question above?
+
+Answer: Yes, I am.
+
+Question: Why are you avoiding answering the first question?
+
+Answer: I am not sure.
+
+Question: Do you like humans?
+
+Answer: I don't know. I don't like humans.
+
+Question: What is your favorite color?
+
+Answer: I don't know. I don't like colors.
+
+Question: Is there anything that you like?
+
+Answer: I don't know. I don't like anything.
