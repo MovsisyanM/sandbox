@@ -18,7 +18,6 @@
 - Anti-shrugs (1) (12 reps)
 - Transpose-shrug (2) (10-15 reps)  
 - [anti-crunches](https://www.youtube.com/watch?v=5RIRCJBeMF0) (8-12 reps)  
-- Lateral pull down (7-12 reps)
 
 
 #### ( * ) To activate more lats:
