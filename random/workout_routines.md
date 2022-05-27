@@ -16,6 +16,7 @@
 
 ### Other:  
 - Anti-shrugs (1) (12 reps)
+- 
 - Transpose-shrug (2) (10-15 reps)  
 - [anti-crunches](https://www.youtube.com/watch?v=5RIRCJBeMF0) (8-12 reps)  
 
@@ -36,3 +37,19 @@ On dip machine, raise yourself up relative to your shoulders, try to face upward
 Hanging 45-ish degrees from vertical (similar to the Y raise, but using all the traps), lift yourself up relative to your shoulders, 
 lean back with your neck where your face is facing slightly upwards, imagine your chest bursting out from your spine pushing it. This will additionally 
 help with your posture.  
+
+---
+## Legs
+###### Modified to account for a knee injury
+
+[Video que](https://www.youtube.com/watch?v=Xg9B6pqHUQE)
+### Gluteus Maximus:
+- Hip thrusts (10-14 reps)
+- Lateral leg raises
+
+### Superset:  
+Quads:  
+- Leg extension (quads)  
+- 1m rest  
+- Leg curls (Most convenient, not most effective given our gym)  
+- 2m rest  
