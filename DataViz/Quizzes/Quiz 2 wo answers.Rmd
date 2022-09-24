@@ -1,0 +1,70 @@
+---
+title: "Quiz 2"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-09-12'
+---
+---
+title: "Quiz2"
+output: html_document
+date: '2022-09-11'
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+
+```
+
+```{r}
+data(iris)
+```
+
+
+1.1. Create a scatterplot of Sepal width and Sepal length. (0.5 point)
+
+```{r}
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length)) + geom_point()
+
+```
+
+1.2. Add regression line using function geom_smooth() and specify parameters where method = "lm" and se = FALSE. What relationship can you see? (0.5 point)
+
+```{r}
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length)) + geom_point() + geom_smooth(method="lm", se=FALSE)
+```
+negative correlation and slope
+
+2.1.Create a scatterplot of Sepal width and Sepal length. Specify the 3rd color as Species.(1 point)
+
+```{r}
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + geom_point()
+```
+
+2.2. Change the color of legend specifying colors red, violet and blue. (1 point)
+
+```{r}
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + geom_point() + scale_color_manual(values=c("red", "violet", "blue"))
+```
+
+2.3. Add Regression line to your plot using geom_smooth() and specify parameters where method = "lm" and se = FALSE. What relationship you can see now? (1 point)
+
+```{r}
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + geom_point() + scale_color_manual(values=c("red", "violet", "blue")) + geom_smooth(method="lm", se=FALSE)
+
+```
+Positive correlation and slope for each species
+
+3. Use faceting for the species category. And specify scales parameter to free. (1 point)
+
+```{r}
+
+ggplot(data = iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + geom_point() + scale_color_manual(values=c("red", "violet", "blue")) + geom_smooth(method="lm", se=FALSE) + facet_wrap(Species ~ .)
+```
+
+
+
+
+
+
