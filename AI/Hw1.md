@@ -60,7 +60,7 @@ c. It is better to use a graph search algorithm since the number of nodes aren't
 
 Password: `***`
 
-$$ \* \in \{X, Y, Z\} $$
+$$ * \in \{X, Y, Z\} $$
 
 Initial state = `` action = append`\*`  
 goal state =

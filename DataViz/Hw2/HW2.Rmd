@@ -1,0 +1,170 @@
+---
+title: "HW2"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-09-28'
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+**Rules: **
+
+**Every plot must have a description and explanation on it. If the plot does not have explanation, you will lose points** 
+
+**You have to submit a knitted(PDF document) also. If a PDF document is missing, you will lose points** 
+
+The dataset describes Airbnb metrics (hotels/house hosting, geographical availability, pricing) in NYC for 2019.
+ 
+Load the NYC dataset. Check the structure and the summary of the data.
+
+```{r}
+nyc <- read.csv("AB_NYC_2019.csv")
+str(nyc)
+summary(nyc)
+```
+ 
+
+1. Create a histogram of the price feature and add mean and median lines to the plot. Describe in words what you can identify. (1 point)
+
+```{r}
+ggplot(data=nyc, aes(x=price)) + geom_histogram() + geom_vline(xintercept=median(nyc$price)) + geom_vline(xintercept=mean(nyc$price), col="red")
+```
+We can see that the mean (red) line is to the right of the median, which means that there are outliers to the right (since the mean is more sensitive to outliers) and that the distribution is skewed to the right.
+
+
+2. Create the Q-Q plot for the price. Describe in words what assumptions you can make. (1 point)
+
+```{r}
+ggplot(data=nyc, aes(sample=price)) + geom_qq()
+```
+Since the points aren't following a line, we can say that this distribution is not normal without testing for normality.
+
+
+3. What do you think? Are there any changes that will make the plot more understandable? If yes, try to make that changes and continue using that plot for future tasks. (Hint play with the x-axis, try to change the limits)  (1 point)
+
+```{r}
+ggplot(data=nyc, aes(x=price)) + geom_histogram() + geom_vline(xintercept=median(nyc$price)) + geom_vline(xintercept=mean(nyc$price), col="red") + scale_x_continuous(limits=c(0,760))
+```
+
+
+4. Create a stacked histogram and fill it with the categorical variable neighbourhood_group. Describe in words what you can identify. (1 point)
+
+```{r}
+ggplot(data=nyc, aes(x=price, fill=neighbourhood_group)) + geom_histogram() + geom_vline(xintercept=median(nyc$price)) + geom_vline(xintercept=mean(nyc$price), col="red") + scale_x_continuous(limits=c(0,760))
+```
+Queens has a smaller quantity of homes and has less outliers (homes priced > 400). Manhattan has more variance as it is more fat-tailed. There are a very small number of homes in Bronx compared to other neighborhoods, but Staten Island has the least.
+
+
+5. (1 point)
+  + 5.1.Use faceting to create a histogram for each neighborhood and remove the legend from the plot.
+
+```{r}
+ggplot(data=nyc, aes(x=price)) + geom_histogram() + geom_vline(xintercept=median(nyc$price)) + geom_vline(xintercept=mean(nyc$price), col="red") + scale_x_continuous(limits=c(0,760)) + facet_wrap(~ neighbourhood_group)
+```
+
+  + 5.2.Why is it easier to compare distributions with density plots? Create the density plot of the price and fill it with the category of neighbourhood_group. Please describe in words.
+
+```{r}
+ggplot(data=nyc, aes(x=price, color=neighbourhood_group)) + geom_density() + geom_vline(xintercept=median(nyc$price)) + geom_vline(xintercept=mean(nyc$price), col="red") + scale_x_continuous(limits=c(0,760))
+```
+It allows us to see the distributions normalized by their counts, so if Staten Island was barely visible before, we now have a clear idea of how the data is distributed. I didn't fill, instead I colored the lines because with fill there was overplotting.
+
+
+6. (1 point)
+  + 6.1.Create a boxplot for the price for each neighborhood and add the mean for each group with the red color. Are there any ways to compare the observations of each group? If yes, please apply it. Please describe it in words.
+
+```{r}
+nyc %>% group_by(neighbourhood_group) %>% 
+  mutate(avg_p = mean(price)) %>%
+  ggplot(aes(x=price)) + geom_boxplot() + 
+  theme(axis.text.y = element_blank()) + 
+  scale_x_continuous(trans = "log10") + 
+  facet_wrap(~ neighbourhood_group, nrow=5) +
+  geom_vline(aes(xintercept=avg_p, color="red"), show.legend = FALSE)
+```
+Yes, here we scale the x axis logarithmically to visualize the distribution better, then we can compare each distribution to each other since we made them share the x axis. Now we can clearly see that Manhatten is generally the more expensive neighborhood.
+
+
+  + 6.2.Do we have any outliers? If yes, please use the method to overcome overplotting.
+
+```{r}
+nyc %>% group_by(neighbourhood_group) %>% 
+  mutate(avg_p = mean(price)) %>%
+  ggplot(aes(x=price, alpha=0.01), show.legend = FALSE) + 
+  geom_boxplot(show.legend = FALSE) + 
+  theme(axis.text.y = element_blank()) + 
+  scale_x_continuous(trans = "log10") + 
+  facet_wrap(~ neighbourhood_group, nrow=5) +
+  geom_vline(aes(xintercept=avg_p, color="red"), show.legend = FALSE)
+
+```
+Yes, we overcame this issue by lowering opacity to 0.01
+
+
+7. Create the violin plot for the price for each neighborhood. (1 point)
+
+```{r}
+nyc %>% group_by(neighbourhood_group) %>% 
+  mutate(avg_p = mean(price)) %>%
+  ggplot(aes(x=price, y=0, alpha=0.01), show.legend = FALSE) + 
+  geom_violin(show.legend = FALSE) + 
+  theme(axis.text.y = element_blank(), axis.title.y = element_blank()) + 
+  scale_x_continuous(trans = "log10") + 
+  facet_wrap(~ neighbourhood_group, nrow=5) +
+  geom_vline(aes(xintercept=avg_p, color="red"), show.legend = FALSE)
+```
+
+Comparing "Index of Economic Freedom" in different regions using Countries.csv data
+Source: The Heritage Foundation and The Wall Street Journal
+
+Load the dataset Countries.csv. Check the structure and summary of the data.
+
+```{r}
+ef <- read.csv("Countries.csv")
+str(ef)
+summary(ef)
+```
+
+
+8. Create the ecDF of Business. Freedom. To make the plot more informative, add the mean and the median to the plot. What assumptions can you make? Please describe in words. (1 point)
+
+```{r}
+ef %>% ggplot(aes(x=Business.Freedom)) + 
+  stat_ecdf() + 
+  geom_vline(xintercept=mean(ef$Business.Freedom), color="red") + 
+  geom_vline(xintercept=median(ef$Business.Freedom))
+```
+It is slightly right-skewed, the lowest value is 40 and the highest is about 95
+
+9. Is the Business Freedom Rate the same in Europe and America? (1 point)
+
+```{r}
+ef %>% ggplot(aes(x=Business.Freedom, color=Region)) + 
+  geom_boxplot() + 
+  geom_vline(xintercept=mean(ef$Business.Freedom), color="maroon") + 
+  geom_vline(xintercept=median(ef$Business.Freedom))
+```
+Business freedom in Europe is better than in America
+
+
+10. Arrange various distribution plots in a grid using the Unemployment feature. (1 point)
+
+```{r}
+ef %>% ggplot(aes(x=Unemployment)) + 
+  geom_boxplot() + 
+  geom_vline(xintercept=mean(ef$Unemployment), color="maroon") + 
+  geom_vline(xintercept=median(ef$Unemployment)) +
+  facet_grid(Region ~ .)
+```
+To do more plots we would need more non-unique categorical variables 
+
+
+
+
+
+
+
