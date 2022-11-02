@@ -1,0 +1,110 @@
+---
+title: "HW3: Visualizing Multivariate data"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(reticulate)
+library(reshape2)
+library(knitr)
+library(ggcorrplot)
+library(GGally)
+library(ggpubr)
+library(hexbin)
+library(ggExtra)
+```
+
+Import Libraries here
+
+
+
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
+```
+
+Write your solutions and comments in this markdown file and submit it with its pdf version to moodle.  
+
+General notes:
+- Make sure to put titles on the plots and labels on axes.   
+- Descriptions for the graphs, write a few words what you see in the graph. (If not done you will lose points.) 
+
+
+For this HW assignment, we will use International Monetary Fund’s World Economic Outlook Database (WEO), released this month (Oct. 2020). WEO database contains selected macroeconomic data series in major country groups and in many individual countries. 
+
+Data starting from 2000 to the present has been retrieved, since for many countries the data for earlier years was incomplete or unavailable (note: there are still many missing values that you need to handle before creating correlations). Additionally, medium-term projections are available for selected indicators. 
+
+
+**1. Examine the relationship between GDP per capita and Unemployment. Use R for this assignment. (15 points)**
+
+* Create a scatterplot. Apply various methods to overcome overplotting. Show “Country groups” as the 3rd aesthetics. What kind of relationship do you see? 
+* Create a 2D plot for the same variables filled with the count of the points. 
+
+```{r}
+
+```
+
+
+**2. Elaborate on the following: “Is it right to pool economic data for all countries together or should the two economic groups (Advanced economies vs. Developing) be analyzed separately?” Backup your arguments with corresponding visualizations. Use R for this assignment. (10 points)**
+
+```{r}
+
+```
+
+  
+**3.	Create a scatterplot matrix to discover the relationship between all economic indicators available in the dataset. Use python for this assignment. (15 points)**
+
+```{r}
+
+```
+
+
+**4 Use both r and python (You have to create one with python and one with r). Create a correlation heatmap. Identify the highest positively and negatively correlated variables. (15 points) **
+
+```{r}
+
+```
+
+```{python}
+
+```
+
+**5.1 Use Python! Create a scatterplot of Unemployment and Government debt. Use aesthetics as Country Groups.What relationship do you see? (15 points) **
+
+
+```{python}
+
+```
+
+**5.2 Use Python! Make the same plot with loess line and change the shapes **
+
+
+```{python}
+
+```
+
+
+**5.3 Use Python! Make the same plot with loess line across different columns (same as face_wrap). **
+
+```{python}
+
+```
+
+**6. For this final task, filter the data for specific country groups or countries of interest, write down the hypothesis you want to check and decide on the most suited visualization types for the analysis you undertake. Use whatever tool you would like to. (30 points)**
+
+```{r}
+
+```
+
+
+

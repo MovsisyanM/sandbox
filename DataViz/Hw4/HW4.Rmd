@@ -1,0 +1,105 @@
+---
+title: "Homework 4"
+output:
+  pdf_document: default
+  html_document: default
+date: '2022-10-27'
+---
+
+
+Load the libraries here. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+Write your solutions and comments in this markdown file and submit it with its pdf version to Moodle.
+
+General notes:
+• Make sure to put titles on the plots and labels on axes.
+• Descriptions for the graphs: explain why the plot is useful and what actions can be taken based on it. This is one of the key requirements, if not done, will lose points.
+
+# Part 1
+
+For this Homework , we will analyze the Moodle logs data for the Data Visualization course. Create at least 3 graphs that can be of value for the course professor. You can use both R and Python. You are free to customize and experiment with visualizations, the key is to provide insights and recommendations for decision-making. (50 points)
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+# Part 2
+
+For the second part, we will analyze survey which is conducted in 2019. You can see the question in the Excel file's sencond sheet.
+
+Q1.1: Create a bar chart using NKRESF (How likely is it to find a solution to the Nagorno Karabakh conflict within the next 5 years through force?) column.  (5 point)
+
+```{r}
+
+```
+
+Q 1.2 Change the bar chart scales to proportions. (5 point)
+
+```{r}
+
+```
+
+Q 1.3 Create the same bar chart using geom_col. What is the difference between geom_bar and geom_col? (5 point)
+
+```{r}
+
+```
+
+Q 2.1 Create stacked bar chart of COMPABL (computer skills) and add labels (counts). How many people have computer advanced skills? (5 point)
+
+```{r}
+
+```
+
+Q 2.2 Change the bar chart to pie chart. (5 point)
+
+```{r}
+
+```
+
+Q 3.1. Create a bar chart of KNOWENG (english knowledge) and fill it with STRATUM (place of residence). (5 point)
+
+```{r}
+
+```
+
+Q 3.2. Get side-by-side bar chart of the previous plot. (5 point)
+
+```{r}
+
+```
+
+Q 3.3 Change it to stacked bar chart with the length of 1. (5 point)
+
+```{r}
+
+```
+
+
+Q 4. Create bar chart of AMULSAR (Do you approve the Amulsar mining project?) and fill it with RESPSEX. (10 point)
+
+```{r}
+
+```
+
+
+
