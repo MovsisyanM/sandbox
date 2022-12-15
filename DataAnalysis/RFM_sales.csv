@@ -1,0 +1,90 @@
+,NAME,CUSTOMER_SEGMENT,RFM_SCORE,COUNTRY
+0,"AV Stores, Co.",POTENTIAL,69.0,UK
+1,Alpha Cognac,RISKY,30.0,France
+2,Amica Models & Co.,RISKY,38.0,Italy
+3,"Anna's Decorations, Ltd",POTENTIAL,70.0,Australia
+4,Atelier graphique,LEAVING,9.0,France
+5,"Australian Collectables, Ltd",RISKY,39.0,Australia
+6,"Australian Collectors, Co.",POTENTIAL,71.0,Australia
+7,"Australian Gift Network, Co",LEAVING,19.0,Australia
+8,Auto Assoc. & Cie.,LEAVING,17.0,France
+9,Auto Canal Petit,POTENTIAL,51.0,France
+10,Auto-Moto Classics Inc.,LEAVING,11.0,USA
+11,Baane Mini Imports,POTENTIAL,53.0,Norway
+12,"Bavarian Collectables Imports, Co.",LEAVING,10.0,Germany
+13,"Blauer See Auto, Co.",RISKY,28.0,Germany
+14,Boards & Toys Co.,LEAVING,11.0,USA
+15,CAF Imports,LEAVING,7.0,Spain
+16,Cambridge Collectables Co.,LEAVING,6.0,USA
+17,Canadian Gift Exchange Network,RISKY,27.0,Canada
+18,"Classic Gift Ideas, Inc",RISKY,25.0,USA
+19,Classic Legends Inc.,RISKY,25.0,USA
+20,"Clover Collections, Co.",LEAVING,15.0,Ireland
+21,Collectable Mini Designs Co.,RISKY,31.0,USA
+22,Collectables For Less Inc.,RISKY,37.0,USA
+23,"Corrida Auto Replicas, Ltd",POTENTIAL,53.0,Spain
+24,Cruz & Sons Co.,RISKY,41.0,Philippines
+25,Daedalus Designs Imports,LEAVING,19.0,France
+26,Danish Wholesale Imports,POTENTIAL,65.0,Denmark
+27,Diecast Classics Inc.,POTENTIAL,60.0,USA
+28,Diecast Collectables,LEAVING,15.0,USA
+29,"Double Decker Gift Stores, Ltd",LEAVING,5.0,UK
+30,"Dragon Souveniers, Ltd.",POTENTIAL,68.0,Singapore
+31,Enaco Distributors,RISKY,32.0,Spain
+32,Euro Shopping Channel,LOYAL,80.0,Spain
+33,FunGiftIdeas.com,RISKY,46.0,USA
+34,Gift Depot Inc.,RISKY,43.0,USA
+35,Gift Ideas Corp.,LEAVING,24.0,USA
+36,Gifts4AllAges.com,RISKY,49.0,USA
+37,Handji Gifts& Co,POTENTIAL,65.0,Singapore
+38,Heintze Collectables,RISKY,44.0,Denmark
+39,Herkku Gifts,RISKY,44.0,Norway
+40,"Iberia Gift Imports, Corp.",LEAVING,13.0,Spain
+41,L'ordine Souveniers,POTENTIAL,68.0,Italy
+42,"La Corne D'abondance, Co.",RISKY,32.0,France
+43,La Rochelle Gifts,LOYAL,78.0,France
+44,Land of Toys Inc.,POTENTIAL,67.0,USA
+45,Lyon Souveniers,RISKY,30.0,France
+46,Marseille Mini Autos,RISKY,39.0,France
+47,Marta's Replicas Co.,RISKY,43.0,USA
+48,Microscale Inc.,LEAVING,9.0,USA
+49,Mini Auto Werke,LEAVING,21.0,Austria
+50,Mini Caravy,RISKY,28.0,France
+51,Mini Classics,RISKY,39.0,USA
+52,Mini Creations Ltd.,POTENTIAL,60.0,USA
+53,Mini Gifts Distributors Ltd.,LOYAL,79.0,USA
+54,Motor Mint Distributors Inc.,RISKY,32.0,USA
+55,Muscle Machine Inc,POTENTIAL,68.0,USA
+56,"Norway Gifts By Mail, Co.",RISKY,30.0,Norway
+57,Online Diecast Creations Co.,POTENTIAL,55.0,USA
+58,Online Mini Collectables,LEAVING,12.0,USA
+59,Osaka Souveniers Co.,LEAVING,20.0,Japan
+60,"Oulu Toy Supplies, Inc.",POTENTIAL,58.0,Finland
+61,Petit Auto,RISKY,45.0,Belgium
+62,Quebec Home Shopping Network,RISKY,36.0,Canada
+63,Reims Collectables,POTENTIAL,68.0,France
+64,Rovelli Gifts,POTENTIAL,66.0,Italy
+65,"Royal Canadian Collectables, Ltd.",RISKY,37.0,Canada
+66,Royale Belge,LEAVING,12.0,Belgium
+67,Salzburg Collectables,POTENTIAL,69.0,Austria
+68,"Saveley & Henriot, Co.",POTENTIAL,58.0,France
+69,Scandinavian Gift Ideas,POTENTIAL,64.0,Sweden
+70,Signal Collectibles Ltd.,LEAVING,10.0,USA
+71,Signal Gift Stores,RISKY,49.0,USA
+72,Souveniers And Things Co.,POTENTIAL,73.0,Australia
+73,"Stylish Desk Decors, Co.",RISKY,43.0,UK
+74,Suominen Souveniers,POTENTIAL,53.0,Finland
+75,Super Scale Inc.,LEAVING,14.0,USA
+76,Technics Stores Inc.,POTENTIAL,59.0,USA
+77,Tekni Collectables Inc.,RISKY,33.0,USA
+78,The Sharp Gifts Warehouse,POTENTIAL,68.0,USA
+79,"Tokyo Collectables, Ltd",POTENTIAL,61.0,Japan
+80,"Toms Spezialitten, Ltd",RISKY,39.0,Germany
+81,"Toys of Finland, Co.",POTENTIAL,54.0,Finland
+82,Toys4GrownUps.com,POTENTIAL,53.0,USA
+83,"UK Collectables, Ltd.",POTENTIAL,54.0,UK
+84,"Vida Sport, Ltd",RISKY,48.0,Switzerland
+85,Vitachrome Inc.,RISKY,36.0,USA
+86,"Volvo Model Replicas, Co",LEAVING,22.0,Sweden
+87,West Coast Collectables Co.,LEAVING,7.0,USA
+88,giftsbymail.co.uk,RISKY,40.0,UK
