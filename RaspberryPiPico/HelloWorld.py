@@ -35,22 +35,26 @@ def morse_to_english(message):
 
 # region Hello world
 
-led_pin = machine.Pin(25, machine.Pin.OUT)
-morse_message = english_to_morse("Hello Mher")
+led_pin = machine.Pin("LED", machine.Pin.OUT)
+morse_message = english_to_morse("Hello Mher".upper())
+print(morse_message)
 
 for _ in range(2 ** 8):
     for c in morse_message:
         if c == " ":
-            led_pin.value(0)
-            utime.sleep(0.5)
+            led_pin.off()
+            utime.sleep(0.53)
         elif c == ".":
-            led_pin.value(1)
-            utime.sleep(0.13)
-            led_pin.value(0)
+            led_pin.on()
+            utime.sleep(0.1)
+            led_pin.off()
         else:
-            led_pin.value(1)
-            utime.sleep(0.27)
-            led_pin.value(0)
+            led_pin.on()
+            utime.sleep(0.3)
+            led_pin.off()
+        utime.sleep(0.27)
 
 # endregion Hello world
+
+
 
