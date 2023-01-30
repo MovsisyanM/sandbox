@@ -107,3 +107,18 @@ $$ \triangledown^2 g(x) = \frac{\partial^2 g}{\partial x_i \partial x_j} = \frac
 
 Answer:  
 If a matrix $ A $ has a negative eigenvalue, it is not PSD and $ x^TAx $ can be negative for some values of $ x $. This means that $ g(x) $ is not a convex function and the optimization problem may not have a unique solution, or may not have a solution at all.
+
+- Assume that the matrix A is positive definite (PD). Write down the closed-form expression for $ x^* $ that minimizes the objective function.  
+
+Answer:  
+$$ \frac{dg}{dx} = Ax + b = 0 $$
+$$ Ax = -b $$
+$$ x = A^{-1}(-b) $$
+
+## Probability Thory
+### Problem 9:  
+Prove or disprove the following statement  
+$$ p(a \vert b, c) = p(a \vert c) \implies p(a \vert b) = p(a) $$
+
+Answer:  
+If, for example, B is a strict subset of the sample space (where b is true) and is a strict superset of C ($ c \implies b $), when the left-hand part of the statement is true, and it won't imply
