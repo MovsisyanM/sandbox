@@ -121,4 +121,68 @@ Prove or disprove the following statement
 $$ p(a \vert b, c) = p(a \vert c) \implies p(a \vert b) = p(a) $$
 
 Answer:  
-If, for example, B is a strict subset of the sample space (where b is true) and is a strict superset of C ($ c \implies b $), when the left-hand part of the statement is true, and it won't imply
+If, for example, B is a strict subset of the sample space (where b is true) and is a strict superset of C ($ c \implies b $), when the left-hand part of the statement is true, it does not imply that the information in $ b $ has no effect on $ a $.
+
+
+### Problem 10:  
+Prove or disprove the following statement  
+$$ p(a \vert b) = p(a) \implies p(a \vert b, c) = p(a \vert c) $$
+
+Answer:  
+If the left part is true, $ a $ is independent of $ b $ ($ A \cap B = \empty $), therefore the right part is true.  
+
+### Problem 11:  
+You are given the joint PDF $ p(a, b, c) $ of three continuous random variables. Show how the following expressions can be obtained using the rules of probability  
+
+1. $ p(a) $
+
+Answer:  
+$$ p(a) = \overset{b}{\int}\overset{c}{\int}p(a, b, c) $$  
+
+2. $ p(c \vert a, b) $
+
+Answer:  
+$$ p(c \vert a, b) = p(a, b, c) $$  
+
+2. $ p(b \vert c) $
+
+Answer:  
+$$ p(b \vert c) = \overset{a}{\int}p(a, b, c) $$
+
+
+### Problem 12:  
+Researchers have developed a test which determines whether a person has a rare disease. The test is fairly reliable: if a person is sick, the test will be positive with 95% probability, if a person is healthy, the test will be negative with 95% probability. It is known that $ \frac{1}{1000} $ of the population have this rare disease. A person (chosen uniformly at random from the population) takes the test and obtains a positive result. What is the probability that the person has the disease?  
+
+
+Answer:  
+```
+p(+|sick) = 0.95
+p(-|!sick) = 0.95
+p(sick) = 1/1000
+```
+
+$$ p(sick \vert +) = \frac{p(+ \vert sick) * p(sick)}{p(+)} = \frac{0.95}{1000 * (\frac{0.95 + (999 * 0.05)}{1000})} \approx 0.0187 $$  
+
+
+### Problem 13:  
+Let $ X \sim \mathcal{N}(\mu, \sigma^2) $, and $ f(x) = ax + bx^2 + c $. What is $ \mathbb{E}[f(x)] $?  
+
+Answer:  
+$$
+\begin{align*} \mathbb{E}[f(x)] &= a\mathbb{E}[X] + b\mathbb{E}[X^2] + c \\
+&= a\mu + b(\sigma^2 - \mu^2) + c
+\end{align*} $$
+
+
+### Problem 14:  
+Let $ p(x) = \mathcal{N}(x \vert \mu, \Sigma) $ and $ g(x) = Ax $ (where $ A \in \mathbb{R}^{N \times N} $). What are the values of the following expressions:  
+- $ \mathbb{E}[g(x)] $
+- $ \mathbb{E}[g(x)g(x)^T] $
+- $ \mathbb{E}[g(x)^Tg(x)] $
+- $ Cov[g(x)] $.
+
+Answer:  
+- $ \mathbb{E}[g(x)] = \mathbb{E}[Ax] = A\mathbb{E}[x] = A\mu $
+- $ \mathbb{E}[g(x)g(x)^T] = \mathbb{E}[Axx^TA^T] = A\mathbb{E}[xx^T]A^T = A\Sigma A^T $
+- $ \mathbb{E}[g(x)^Tg(x)] = \mathbb{E}[x^TA^T Ax] = \mathbb{E}[x^T A^T A x] = \mathbb{E}[x^T \Lambda x] $ where $\Lambda$ is a diagonal matrix containing the eigenvalues of $A^T A$.
+- $ Cov[g(x)] = \mathbb{E}[(g(x) - \mathbb{E}[g(x)]) (g(x) - \mathbb{E}[g(x)])^T] = \mathbb{E}[g(x)g(x)^T] - \mathbb{E}[g(x)]\mathbb{E}[g(x)]^T = A\Sigma A^T - A\mu\mu^T A^T $.
