@@ -12,8 +12,8 @@ PART 1
 
 /*
 Exercise 1 (2 points): Create a new database named hw_db using the CREATE DATABASE statement with the following explicit specifications for database and transaction log files:
-•	Store the database file with the logical name hw_db_dat in the same directory as the SQL script file under the name hw_db.mdf, set the initial size of mdf to 5MB, set the maximum size as unlimited, and the file growth at 8 percent. 
-•	Store the log file called hw_db_log in the same directory as the SQL script under the name hw_db_log.ldf. Set the initial size to 2MB, the maximum size to 10MB, and the file growth to 500KB.
+ï¿½	Store the database file with the logical name hw_db_dat in the same directory as the SQL script file under the name hw_db.mdf, set the initial size of mdf to 5MB, set the maximum size as unlimited, and the file growth at 8 percent. 
+ï¿½	Store the log file called hw_db_log in the same directory as the SQL script under the name hw_db_log.ldf. Set the initial size to 2MB, the maximum size to 10MB, and the file growth to 500KB.
 */
 
 CREATE DATABASE hw_db
@@ -193,7 +193,7 @@ CHECK (quantity >= 5 AND quantity <= 40);
 
 /*
 Exercise 11 (2 points): Try deleting the primary key constraint of the customers table. 
-Why isn’t that working?
+Why isnï¿½t that working?
 */
 --Answer:
 -- Removing the primary key constraint while the foreign key constraint is still in place would violate referential integrity, 
@@ -377,7 +377,7 @@ from works_on
 where project_no = 'p3';
 
 /*
-Exercise 16 (2 points): Get the employee numbers for employees who didn’t enter their project in 2007.
+Exercise 16 (2 points): Get the employee numbers for employees who didnï¿½t enter their project in 2007.
 */
 
 select emp_no
@@ -397,60 +397,97 @@ where job <> 'Clerk' and project_no = 'p1';
 Exercise 18 (2 points): Get the enter dates for all employees in project p2 whose jobs have not been determined yet.
 */
 
+select enter_date
+from works_on
+where project_no = 'p2' and job is null;
 
 
 /*
 Exercise 19 (2 points): Get the employee numbers and last names of all employees 
-whose first names contain two letter t’s (HINT: Use LIKE and regular expressions).
+whose first names contain two of the letter `t` (HINT: Use LIKE and regular expressions).
 */
 
+select emp_no, emp_lname
+from employee 
+where emp_fname like '%tt%';
 
 /*
 Exercise 20 (2 points): Get the employee numbers and first names of all employees whose last names have a letter o or a as the second character and end with the letters es (HINT: Use LIKE and regular expressions).
 */
 
+select emp_no, emp_fname
+from employee 
+where emp_lname like '_[oa]%es';
+
 
 /*
-Exercise 21 (2 points): Find the employee numbers of all employees whose department is located in Seattle.
+Exercise 21 (2 points): Find the employee numbers of all employees whose department is located in Seattle.**
 */
 
+select emp_no from employee where emp_loc like '%Seattle%';
+
+-- alternatively, a more clean way would be
+
+select emp_no 
+from employee 
+where dept_no in (
+    select dept_no 
+    from department 
+    where location = 'Seattle'
+);
 
 /*
 Exercise 22 (2 points): Find the last and first names of all employees who entered their projects 
 on 06.01.2007.
 */
 
+select emp_lname, emp_fname from employee
+where emp_no in (
+    select emp_no 
+    from works_on 
+    where enter_date = '2007-06-01'
+);
 
 /*
-Exercise 23 (2 points): Group all departments using their locations.
+Exercise 23 (2 points): Group all departments using their locations. 
 */
 
+select * from department order by location;
 
 /*
 Exercise 24 (2 points): How does the GROUP BY clause manage the NULL values? 
 */
 --Answer:
-
+-- If a column being grouped contains NULL values, those values will be grouped together as a separate group.
 /*
 Exercise 25 (2 points): What is the difference between COUNT(*) and COUNT(column)?
 */
 --Answer:
-
+-- count(*) counts nulls too, unlike count(column)
 /*
-Exercise 26 (2 points): Find the largest employee number.
+Exercise 26 (2 points): Find the largest em**ployee number.
 */
-
+select max(emp_no) from employee;
 
 /*
 Exercise 27 (2 points): Get the jobs that are done by more than two employees.
 */
 
+select project_no, count(emp_no) as workers
+from works_on 
+group by project_no
+having count(emp_no) > 1;
 
 /*
-Exercise 28 (2 points): Find the distinct employee numbers of all employees
-who are clerks or work for department d3.
+Exercise 28 (2 points): Find the distinct employee numbers of all employees who are clerks or work for department d3.
 */
 
+select *
+from works_on
+where job = 'Clerk' 
+or emp_no in (
+    select emp_no from employee where dept_no = 'd3'
+);
 
 /*
 Exercise 29 (2 points): For the project and works_on tables, create the following:
@@ -458,11 +495,27 @@ Exercise 29 (2 points): For the project and works_on tables, create the followin
 2.	Cartesian product
 */
 
+-- 1. Natural join
+SELECT *
+FROM project
+JOIN works_on ON project.project_no = works_on.project_no;
+
+-- 2. Cartesian product
+SELECT *
+FROM project, works_on;
+
 
 /*
 Exercise 30 (2 points): Get the employee numbers and job titles of all employees 
 working on project Gemini. Use the JOIN statement.
 */
+
+select emp_no, job
+from works_on
+where project_no in (
+    select project_no from project 
+    where project_name = 'Gemini'
+);
 
 
 /*
@@ -470,29 +523,66 @@ Exercise 31 (2 points): Get the first and last names of all employees
 who work for department Research or Accounting. Use the JOIN statement.
 */
 
+select emp_fname, emp_lname
+from employee
+where dept_no in (
+    select dept_no 
+    from department 
+    where dept_name in ('Research', 'Accounting')
+)
 
 /*
 Exercise 32 (2 points): Get the enter dates of all clerks who belong to the department d1. Use the JOIN statement.
 */
 
+select * 
+from works_on
+left join employee
+on works_on.emp_no = employee.emp_no
+where dept_no = 'd1' and job = 'Clerk';
 
 /*
 Exercise 33 (2 points): Get the names of projects on which two or more clerks are working.
 Hint: Use subquery and count(*)
 */
 
+select project_name 
+from project
+where project_no in (
+    select project_no
+    from works_on
+    where job = 'Clerk'
+    group by project_no
+    having count(emp_no) >= 2
+);
 
 /*
 Exercise 34 (2 points): Get the first and last names of the employees who are managers and 
 work on project Mercury. Use the JOIN statement.
 */
 
+select emp_fname, emp_lname
+from employee left join works_on
+on works_on.emp_no = employee.emp_no
+where job = 'Manager';
 
 /*
 Exercise 35 (2 points): Get the first and last names of all employees 
 who entered the project at the same time as at least one other employee.
 */
 
+select emp_fname, emp_lname
+from employee 
+where emp_no in (
+    select emp_no 
+    from works_on
+    where enter_date in (
+        select enter_date
+        from works_on 
+        group by enter_date 
+        having count(*) >= 2
+    )
+);
 
 /*
 Exercise 36 (2 points): Explain why is the following statement wrong? 
@@ -505,13 +595,32 @@ select project_name
 		(select project_no from works_on where job = 'Clerk');
 */
 --Answer:
-
+--Cannot compare (equality in this case) a table to a single value
+select project_name
+	from project
+	where project_no in
+		(select project_no from works_on where job = 'Clerk');
 
 /*
 Exercise 37 (2 points): Get the employee numbers of the employees 
 living in the same location and belonging to the same department as one another.
 */
 
+select emp_no
+from employee
+where dept_no in (
+    select dept_no
+    from employee
+    group by dept_no, emp_loc
+    having count(emp_no) > 1
+)
+and emp_loc in (
+    select emp_loc
+    from employee
+    group by dept_no, emp_loc
+    having count(emp_no) > 1
+)
+order by dept_no, emp_loc;
 
 /*
 Exercise 38 (2 points): Get the employee numbers of all employees belonging to the Marketing department. 
@@ -519,33 +628,68 @@ Exercise 38 (2 points): Get the employee numbers of all employees belonging to t
 2.	The subquery
 */
 
+--1
+select emp_no
+from employee
+left join department
+on department.dept_no = employee.dept_no
+where dept_name = 'Marketing';
+
+--2
+select emp_no
+from employee
+where dept_no in (
+    select dept_no
+    from department
+    where dept_name = 'Marketing'
+);
 
 /*
 Exercise 39 (2 points): Insert the data of a new employee called Julia Long, 
 whose employee number is 11111. Her department number is not known yet. Her location is North Dallas
 */
 
+insert into employee values (11111, 'Julia', 'Long', null,'North Dallas County');
 
 /*
 Exercise 40 (2 points): Create a new table called emp_d1_d2 with all employees who work for department d1 or d2, and load the corresponding rows from the employee table.
 */
 
+select emp_no
+into emp_d1_d2
+from employee
+where dept_no in ('d1', 'd2');
 
 /*
 Exercise 41 (2 points): Create a new table of all employees who entered their projects in 2007 
 and load it with the corresponding rows from the employee table.
 */
 
+select *
+into emp_in_07
+from employee
+where emp_no in (
+    select emp_no 
+    from works_on 
+    where enter_date 
+    between '2007/1/1' and '2007/12/31'
+);
 
 /*
 Exercise 42 (2 points): Modify the job of all employees in project p1 who are managers. 
 They have to work as clerks from now on.
 */
 
+UPDATE works_on
+SET job = 'Clerk'
+WHERE project_no = 'p1' AND job = 'Manager';
 
 /*
 Exercise 43 (2 points): Increase the budget of the project where the manager has the employee number 10102. The increase is 10 percent.
 */
+
+select project_no
+from project
 
 
 /*
