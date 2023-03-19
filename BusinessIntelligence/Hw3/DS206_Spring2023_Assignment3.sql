@@ -688,26 +688,41 @@ WHERE project_no = 'p1' AND job = 'Manager';
 Exercise 43 (2 points): Increase the budget of the project where the manager has the employee number 10102. The increase is 10 percent.
 */
 
-select project_no
-from project
+update project
+set budget = budget * 1.1
+where project_no in (
+    select project_no
+    from works_on
+    where emp_no = 10102 and job = 'Manager'
+);
 
 
 /*
 Exercise 44 (2 points): The budgets of all projects are no longer determined. Assign all budgets the NULL value.
 */
 
+update project
+set budget = null;
 
 /*
 Exercise 45 (2 points): Change the name of the department for which the employee with the first name James works. 
 The new department name is Sales.
 */
 
+update department
+set dept_name = 'Sales' 
+where dept_no in (
+    select dept_no from employee where emp_fname = 'James'
+);
 
 /*
 Exercise 46 (2 points): Modify the jobs of the employee with the employee number 28559. 
 From now on she will be the manager for all her projects.
 */
 
+update works_on
+set job = 'Manager'
+where emp_no = 28559;
 
 /*
 Exercise 47 (2 points): Change the enter date for the projects for those employees 
@@ -715,6 +730,16 @@ who work in project p1 and belong to department Sales.
 The new date is 12.12.2007.
 */
 
+update works_on
+set enter_date = '2007/12/12'
+where emp_no in (
+    select employee.emp_no
+    from employee left join works_on
+    on employee.emp_no = works_on.emp_no
+    left join department
+    on employee.dept_no = department.dept_no
+    where project_no = 'p1' and dept_name = 'Sales'
+);
 
 /*
 Exercise 48 (2 points): Make sure that all the records of a project are automatically
@@ -722,19 +747,30 @@ deleted from the works_on table when a project is deleted in the project table.
 Test the solution on the p1 project.
 */
 
+alter table works_on
+add constraint fk_works_on_project
+foreign key (project_no) references project (project_no)
+on delete cascade;
+
+delete from project
+where project_no = 'p1';
 
 /*
 Exercise 49 (2 points): Delete the information (rows) in the works_on table for all employees 
 who work for the departments located in Dallas.
 */
 
+delete from works_on where emp_no in (
+    select emp_no from employee where dept_no in (
+        select dept_no from department where location = 'Dallas'
+    )
+)
 
 /*
 Exercise 50 (2 points): Make sure that all the info about a department is automatically
 updated in the employee table when a department is updated in the department table.
 Test the solution on the d3 project (change it to d4).
 */
-
 
 
 
