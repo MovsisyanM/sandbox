@@ -17,3 +17,5 @@ BusinessIntelligence/Midterm 1/Mher_Movsisyan_DS206_Midterm1.pbix
 BusinessIntelligence/Midterm 1/DS206_Spring2023_Midterm1_Description.pdf
 *.ldf
 *.mdf
+secret*.txt
+*.pyc

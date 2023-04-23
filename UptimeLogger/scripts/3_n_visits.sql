@@ -1,0 +1,1 @@
+select path, count(*) as n_visits from visits WHERE date(time) = CURDATE() group by path order by count(*) desc;
