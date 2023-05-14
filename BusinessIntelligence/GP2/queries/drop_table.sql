@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS  {db}.{schema}.{table} ;

@@ -1,0 +1,1 @@
+-- The table creation is done via `define_tbl` and it is best to not have a template SQL for it.
