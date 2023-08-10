@@ -16,3 +16,5 @@ $$\frac{dy}{dx} + p(x)y = g(x)$$
 Solution:
 $$I(x) = e^{\int_{x_0}^xpdx}$$  
 $$y(x) = \frac{1}{I(x)}\left(y_0 + \int_{x_0}^xI(x)g(x)dx\right)$$
+
+One thing I noticed by setting $p(x) = g(x)$ is that the equation now becomes separable and there is no need to do all the above
