@@ -1,0 +1,108 @@
+FreePiano 2.2
+
+GroupCount	1
+Group	Set	0
+KeySignature	Set	0
+Velocity	In_0	Set	80
+Velocity	In_1	Set	100
+Sustain	Out_0	Set	127
+Keydown	Esc	Sustain	In_0	Set	0
+Keydown	Esc	Sustain	In_1	Set	0
+Keyup	Esc	Sustain	In_0	Set	127
+Keyup	Esc	Sustain	In_1	Set	127
+Keydown	F1	Group	Inc	1
+Keydown	F2	Group	Dec	1
+Keydown	F3	KeySignature	Inc	1
+Keydown	F4	KeySignature	Dec	1
+Keydown	F5	Octave	In_0	Inc	1
+Keydown	F6	Octave	In_0	Dec	1
+Keydown	F7	Octave	In_1	Inc	1
+Keydown	F8	Octave	In_1	Dec	1
+Keydown	F9	Velocity	In_0	Inc	1
+Keydown	F10	Velocity	In_0	Dec	1
+Keydown	F11	Velocity	In_1	Inc	1
+Keydown	F12	Velocity	In_1	Dec	1
+Keydown	~	Note	In_0	B4
+Keydown	1	Note	In_0	C5
+Keydown	2	Note	In_0	D5
+Keydown	3	Note	In_0	E5
+Keydown	4	Note	In_0	F5
+Keydown	5	Note	In_0	G5
+Keydown	6	Note	In_0	A5
+Keydown	7	Note	In_0	B5
+Keydown	8	Note	In_0	C6
+Keydown	9	Note	In_0	D6
+Keydown	0	Note	In_0	E6
+Keydown	-	Note	In_0	F6
+Keydown	=	Note	In_0	G6
+Keydown	Backspace	Note	In_0	A6
+Keydown	Tab	Note	In_0	B3
+Keydown	Q	Note	In_0	C4
+Keydown	W	Note	In_0	D4
+Keydown	E	Note	In_0	E4
+Keydown	R	Note	In_0	F4
+Keydown	T	Note	In_0	G4
+Keydown	Y	Note	In_0	A4
+Keydown	U	Note	In_0	B4
+Keydown	I	Note	In_0	C5
+Keydown	O	Note	In_0	D5
+Keydown	P	Note	In_0	E5
+Keydown	{	Note	In_0	F5
+Keydown	}	Note	In_0	G5
+Keydown	|	Note	In_0	A5
+Keydown	CapsLock	Note	In_0	B2
+Keydown	A	Note	In_0	C3
+Keydown	S	Note	In_0	D3
+Keydown	D	Note	In_0	E3
+Keydown	F	Note	In_0	F3
+Keydown	G	Note	In_0	G3
+Keydown	H	Note	In_0	A3
+Keydown	J	Note	In_0	B3
+Keydown	K	Note	In_0	C4
+Keydown	L	Note	In_0	D4
+Keydown	:	Note	In_0	E4
+Keydown	"	Note	In_0	F4
+Keydown	Enter	Note	In_0	G4
+Keydown	Shift	Note	In_0	B1
+Keydown	Z	Note	In_0	C2
+Keydown	X	Note	In_0	D2
+Keydown	C	Note	In_0	E2
+Keydown	V	Note	In_0	F2
+Keydown	B	Note	In_0	G2
+Keydown	N	Note	In_0	A2
+Keydown	M	Note	In_0	B2
+Keydown	<	Note	In_0	C3
+Keydown	>	Note	In_0	D3
+Keydown	?	Note	In_0	E3
+Keydown	RShift	Note	In_0	F3
+Label	Space	FreePiano
+Keydown	PrintScreen	Play
+Keydown	ScrollLock	Record
+Keydown	Pause	Stop
+Keydown	Insert	Note	In_1	F6
+Keydown	Home	Note	In_1	G6
+Keydown	PgUp	Note	In_1	A6
+Keydown	Delete	Note	In_1	C6
+Keydown	End	Note	In_1	D6
+Keydown	PgDn	Note	In_1	E6
+Keydown	Up	Note	In_1	F3
+Keydown	Left	Note	In_1	C3
+Keydown	Down	Note	In_1	D3
+Keydown	Right	Note	In_1	E3
+Keydown	NumLock	Note	In_1	F5
+Keydown	Num/	Note	In_1	G5
+Keydown	Num*	Note	In_1	A5
+Keydown	Num-	Note	In_1	B5
+Keydown	Num7	Note	In_1	B4
+Keydown	Num8	Note	In_1	C5
+Keydown	Num9	Note	In_1	D5
+Keydown	Num+	Note	In_1	E5
+Keydown	Num4	Note	In_1	F4
+Keydown	Num5	Note	In_1	G4
+Keydown	Num6	Note	In_1	A4
+Keydown	Num1	Note	In_1	C4
+Keydown	Num2	Note	In_1	D4
+Keydown	Num3	Note	In_1	E4
+Keydown	NumEnter	Note	In_1	B3
+Keydown	Num0	Note	In_1	G3
+Keydown	Num.	Note	In_1	A3
