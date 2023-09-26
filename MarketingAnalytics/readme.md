@@ -164,10 +164,10 @@ Marketing: an exchange between a firm and its cutomers.
 - Laggards
 
 **Bass Model**:  
-$$ {\color{Lime}\frac{f(t)}{1 - F(t)}} = {\color{Orange}p} + \frac{\color{Red}q}{M}[A(t)] $$  
-$ {\color{Lime}\frac{f(t)}{1 - F(t)}}$: hazard rate  
-$ {\color{Orange}p} $: innovation rate  
-$ {\color{Red}q} $: imitation rate  
+$${\color{Lime}\frac{f(t)}{1 - F(t)}} = {\color{Orange}p} + \frac{\color{Red}q}{M}[A(t)]$$  
+${\color{Lime}\frac{f(t)}{1 - F(t)}}$: hazard rate  
+${\color{Orange}p}$: innovation rate  
+${\color{Red}q}$: imitation rate  
 M: market potential  
 t: time  
 f(t): fraction of total market that adopts at time t  
@@ -201,11 +201,11 @@ or
   
 
 
-**Statistical power** ( $ 1 - \beta $ ): prob of rejecting a false $H_0$  
+**Statistical power** ( $1 - \beta$ ): prob of rejecting a false $H_0$  
 
 |   | H<sub>0</sub> is true | H<sub>1</sub> is false |  
 | - | --------------- | ----------------:|  
-| Don't reject | Correct, 1-a | Type 2, $ \beta $ |  
+| Don't reject | Correct, 1-a | Type 2, $\beta$ |  
 | Reject | Type 1, a | Correct, 1-$\beta$ |  
   
 **A/B Testing steps**:  
@@ -243,4 +243,6 @@ $$ FDR = E(V/R|R > 0)P(R>0) $$
 ### For false discovery rate
 
 **Benjamin-Hochberg procedure**:
-To do
+1. Sort p-values in ascending order
+2. Multiply the p-values by $\frac{m}{k}$ (starting count from 1)
+3. Check
