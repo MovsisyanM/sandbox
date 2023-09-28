@@ -164,10 +164,10 @@ Marketing: an exchange between a firm and its cutomers.
 - Laggards
 
 **Bass Model**:  
-$$ {\color{Lime}\frac{f(t)}{1 - F(t)}} = {\color{Orange}p} + \frac{\color{Red}q}{M}[A(t)] $$  
-$ {\color{Lime}\frac{f(t)}{1 - F(t)}}$: hazard rate  
-$ {\color{Orange}p} $: innovation rate  
-$ {\color{Red}q} $: imitation rate  
+$${\color{Lime}\frac{f(t)}{1 - F(t)}} = {\color{Orange}p} + \frac{\color{Red}q}{M}[A(t)]$$  
+${\color{Lime}\frac{f(t)}{1 - F(t)}}$: hazard rate  
+${\color{Orange}p}$: innovation rate  
+${\color{Red}q}$: imitation rate  
 M: market potential  
 t: time  
 f(t): fraction of total market that adopts at time t  
@@ -176,10 +176,13 @@ F(t): Cumulative f(t)
 $$ A(t) = M * F(t) $$  
 $$ a(t) = M * f(t) $$  
 
-...
-$$ a(t) = \beta_0 + \beta_1A(t) + \beta_2A^2(t) $$  
-$$ \beta_0 = pm \ \ \ \ \ \ \ \ \ \ \beta_1 = (q-p) \ \ \ \ \ \ \ \ \ \ \beta_2 = -\frac{q}{M} $$    
 ...  
+
+$$ a(t) = \beta_0 + \beta_1A(t) + \beta_2A^2(t) $$  
+$$ \beta_0 = pm \ \ \ \ \ \ \ \ \ \ \beta_1 = (q-p) \ \ \ \ \ \ \ \ \ \ \beta_2 = -\frac{q}{M} $$  
+
+...  
+
 $$ F(t) = \frac{1 - e^{-(p + q)t}}{1 + \frac{q}{p}e^{-(p+q)t}} $$  
 $$ f(t) = \frac{(p + q)^2e^{-(p+q)t}}{p[1 + \frac{q}{p}e^{-(p+q)t}]^2} $$  
 
@@ -198,10 +201,48 @@ or
   
 
 
-**Statistical power** ( $ 1 - \beta $ ): prob of rejecting a false $H_0$  
+**Statistical power** ( $1 - \beta$ ): prob of rejecting a false $H_0$  
 
-|   | $ H_0 $ is true | $ H_0 $ is false |  
+|   | H<sub>0</sub> is true | H<sub>1</sub> is false |  
 | - | --------------- | ----------------:|  
-| Don't reject | Correct, 1-a | Type 2, $ \beta $ |  
+| Don't reject | Correct, 1-a | Type 2, $\beta$ |  
 | Reject | Type 1, a | Correct, 1-$\beta$ |  
+  
+**A/B Testing steps**:  
+1. Choose metrics for evaluation  
+2. Power analysis  
+3. Sample  
+4. Analyze and conclude  
 
+### Multivariate error control  
+
+**Per-comparison error rate**:  
+
+$$ PCER = E(V)/m $$  
+
+**Per-family error rate**:  
+
+$$ E(V) $$  
+
+**Family-wise error rate (prob of at least 1 Type 1 error)**:  
+
+$$ FWER = P(V \geq 1) $$  
+
+**False discovery rate (expected proportion of Type 1 errors among rejects)**:  
+
+$$ FDR = E(V/R|R > 0)P(R>0) $$  
+
+### For Family-wise error rate
+**Bonferroni's method**: Divide alpha with number of hypothesis
+
+**Holm's method**:  
+1. Sort p-values in ascending order
+2. Multiply the p-values by m + 1 - k (starting count from 1)
+3. Check
+
+### For false discovery rate
+
+**Benjamin-Hochberg procedure**:
+1. Sort p-values in ascending order
+2. Multiply the p-values by $\frac{m}{k}$ (starting count from 1)
+3. Check
