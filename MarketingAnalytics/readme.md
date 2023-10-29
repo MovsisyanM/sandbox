@@ -246,3 +246,72 @@ $$ FDR = E(V/R|R > 0)P(R>0) $$
 1. Sort p-values in ascending order
 2. Multiply the p-values by $\frac{m}{k}$ (starting count from 1)
 3. Check
+
+  
+T-Value: "Degree of difference"  
+P-Value: Probability of result by random chance  
+  
+$$ n = \left(\frac{Z_{1-\alpha/2} + _{1-\beta/2}}{Effect Size}\right)^2 $$
+
+Standard error:  
+
+$$ SE = \frac{\sigma}{\sqrt{n}} $$  
+
+Cohen's d:  
+
+$$ \frac{\bar{x_t} - \bar{x_c}}{\text{pooled SD}} = \frac{\bar{x_t} - \bar{x_c}}{\sqrt{(s_t^2 + s_c^2)/2}} $$  
+
+### Customer lifetime value
+
+$$ CLV = \sum_{t=1}^T\frac{(p_t - C_t)r_t}{(1+i)^t} - AC $$  
+
+where $ p_t $ : the revenue earned from a customer at time t  
+$ C_t $ : direct costs of servicing the customer at time t  
+$ i $ : discount rate  
+$ AC $ : Acquisition Costs  
+$ r_t $ : probability of the customer to be "alive" at time t (retention rate)  
+
+And when T tends to infinity, we get:  
+
+$$ CLV = m\frac{r}{1+i-r} - AC $$  
+
+### Time value of money
+
+$$ PV = \frac{FV}{(1+r)^t} $$  
+
+  
+CLV types:  
+- Acquisition CLV  
+- Existing CLV  
+
+Business model types:  
+- Non-contractual continuous (Supermarkets)
+- Non-contractual discrete (Concert tickets)
+- Contractual continuous (Netflix, Amzn Prime)
+- Contractual discrete (Prepaid plans, game subscriptions)
+
+Estimating existing CLV: purchase amount * likelihood of purchase  
+
+**Cohort**: Time-dependent segment  
+
+### Negative binomial distribution:  
+
+For example, we can define rolling a 6 on a die as a success, and rolling any other number as a failure, and ask how many failure rolls will occur before we see the third success (r=3).
+
+`r`: number of fails till experiment is stopped  
+`p`: prob of success  
+
+$$ f(x) = \binom{x+r-1}{x}(1-p)^r*p^x $$  
+
+$$ \mu = \frac{pr}{1-p} $$  
+
+$$ \sigma^2 = \frac{pr}{(1-p)^2} $$  
+
+### Pareto distribution
+
+`a` > 0: shape  
+`l` > 0: scale  
+
+$$ f(x) = \frac{a}{\lambda}(1+\frac{x}{\lambda})^{-(\alpha+1)} $$  
+$$ F(x) = 1 - (1 + \frac{x}{\lambda})^{-\alpha} $$  
+$$ \mu = \frac{\lambda}{\alpha-1} $$  
