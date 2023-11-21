@@ -315,3 +315,19 @@ $$ \sigma^2 = \frac{pr}{(1-p)^2} $$
 $$ f(x) = \frac{a}{\lambda}(1+\frac{x}{\lambda})^{-(\alpha+1)} $$  
 $$ F(x) = 1 - (1 + \frac{x}{\lambda})^{-\alpha} $$  
 $$ \mu = \frac{\lambda}{\alpha-1} $$  
+
+### Silhouette analysis
+
+$$ s = \frac{\mu_{ex}-\mu_{in}}{max(\mu_{in}, \mu_{ex})} $$
+
+### Survival estimator (Kaplan-Meier)  
+The probability of surviving at least to time t
+
+$$ S(t) = P(T > t) = \prod_{t_i\leq T}(1-\frac{d_i}{a_i}) $$  
+
+$$ H(t) = -ln(S(t)) $$
+
+### Cox proportional hazard method  
+Modeling time to specified event
+
+$$ h(t \vert X_i) = h_0(t)exp(\sum_{j=1}{n}\beta_jX_j)
