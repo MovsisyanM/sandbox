@@ -323,6 +323,9 @@ $$ s = \frac{\mu_{ex}-\mu_{in}}{max(\mu_{in}, \mu_{ex})} $$
 ### Survival estimator (Kaplan-Meier)  
 The probability of surviving at least to time t
 
+H0: Survival curves are not different
+H1: Survival curves are different
+
 $$ S(t) = P(T > t) = \prod_{t_i\leq T}(1-\frac{d_i}{a_i}) $$  
 
 $$ H(t) = -ln(S(t)) $$
@@ -330,4 +333,111 @@ $$ H(t) = -ln(S(t)) $$
 ### Cox proportional hazard method  
 Modeling time to specified event
 
-$$ h(t \vert X_i) = h_0(t)exp(\sum_{j=1}{n}\beta_jX_j)
+$$ h(t \vert X_i) = h_0(t)exp(\sum_{j=1}{n}\beta_jX_j) $$  
+
+$$ HRatio = exp(\sum_{j=1}^{n}\beta_j(X_2-X_1)) $$  
+
+HR = 1: Predictor has no affect on the hazard
+HR > 1: Predictor increases hazard, thus decreasing the survival time
+HR < 1: Predictor reduces hazard, thus increasing the survival time
+
+H0 : Hazard rates are proportional
+H1 : Hazard rates are not proportional
+
+### Accelerated Failure Time (AFT) model
+
+$$ ln(T) = \beta_0 + \beta_1X_1 + \beta_2X_2 \dots $$  
+
+Weibull:  
+γ < 1 indicates that the failure rate decreases over time.  
+γ = 1 indicates that the failure rate is constant over time. The Weibull 
+distribution reduces to an exponential distribution.  
+γ > 1 indicates that the failure rate increases with time.  
+
+### Back to CLV
+
+$$ CLV = MM\sum_{i=1}^t\frac{p_i}{(1+r/12)^{i-1}} $$
+
+### Graph theory
+
+Diameter: the largest shortest path in the graph  
+Connected: path between every pair of verts  
+Connected component: maximal connected subgraph  
+Weakly connected: directed graph that if replaced with undirected will be connected  
+Strongly connected: directed path between every pair of verts  
+
+#### Local clustering coefficient  
+
+$$ C_i = \frac{1}{k_i(k_i-1)}\sum_{j, k}A_{ij}A_{jk}A_{ki} $$  
+
+#### Average clustering coefficient  
+
+$$ \hat{C} = \frac{1}{n}\sum_{i=1}^{n}C_i $$  
+
+#### Global clustering coefficient  
+
+$$ C_{global} = \frac{\text{number of closed triplets}}{\text{number of all triplets}} $$  
+
+### Centrality measures  
+All below should be normalized 
+
+
+#### Degree centrality  
+
+Number of nearest neighbors  
+
+#### Closeness centrality  
+
+$$ C_C(i) = \frac{1}{\sum_jd(i, j)} $$  
+
+#### Betweenness centrality  
+
+Number of shortest paths going thru the node
+
+#### Eigen vector centrality  
+
+The importance of a node depends on the importance of its neighbors. It assigns relative
+scores to all nodes in the network based on the concept that connections to high-scoring
+nodes contribute more to the score of the node in question than equal connections to
+low-scoring nodes.
+
+### Similarities  
+
+#### Jaccard similarity  
+
+Jaccard normalizes the number of shared neighbors between two nodes based on
+the size of the union of its two neighborhoods. High score means high similarity
+between nodes.  
+
+$$ Sim_{jaccard}(v, u) = \frac{\vert N(v) \cap N(u)\vert}{\vert N(v) \cup N(u)\vert} $$  
+
+#### Cosine similarity
+
+$$ Sim_{\text {cosine }}(v, u)=\frac{|N(v) \cap N(u)|}{\sqrt{|N(v) * N(u)|}} $$  
+
+### Community detection
+
+Graph density: $\rho=\frac{m}{n(n-1) / 2}$  
+Community internal density: $\delta_{i n t}=\frac{m_s}{n_s\left(n_s-1\right) / 2}$  
+External density:  
+
+$$ \begin{gathered} \
+\delta_{\text {ext }}=\frac{m}{n(n-1)} \\\ 
+\delta_{\text {int }}>\rho, \delta_{\text {ext }}<\rho \
+\end{gathered} $$
+
+Modularity score: $Q=\sum_u\left(\frac{m_u}{m}-\left(\frac{k_u}{2 m}\right)^2\right)$  
+where:  
+$k_u$: total degrees for the internal nodes  
+$\frac{m_u}{m}$: the ratio of internal edges to total edges
+
+### Grivan-Newman algo  
+
+Recursively remove the edges with the maximum edge betweenness centrality. The highest EBC, means the most important bridge: connecting two social groups.  
+Computationally expensive  
+
+#### Edge betweenness centrality
+
+The sum of the fraction of all-pairs shortest paths that pass through e edge  
+
+$$ c_B(e)=\sum_{s, t} \frac{\sigma(s, t \mid e)}{\sigma(s, t)} $$
