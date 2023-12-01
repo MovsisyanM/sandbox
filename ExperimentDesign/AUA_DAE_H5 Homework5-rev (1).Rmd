@@ -1,0 +1,73 @@
+---
+title: "Psychophysics"
+author: "Mher Movsisyan, TadamasaSawada"
+date: "2023-12-01"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+if (!require("ggplot2")) install.packages("ggplot2")
+library(ggplot2)
+if (!require("lattice")) install.packages("lattice")
+library("lattice")
+set.seed(171)
+```
+
+# Q1. Signal Detection Theory
+Consider a pair of normal distributions in a 1D space are given (red and blue in Figure 1). Their positions are different and are unknown. Their standard deviations are unknown but are the same to one another.
+When a point (criterion) is given in the space, each of the two distributions is divided into two segments. The left and right segments of the blue region are 60% and 40%. The left and right segments of the red region are 15% and 85%.
+![fig](https://github.com/MovsisyanM/sandbox/blob/main/ExperimentDesign/resources/AUA_DAE_H5%20Homework5%20Fig1.png?raw=true)
+
+Q1a. Compute a distance of a center of the blue distribution from the criterion relative to the standard deviation of the blue distribution.
+Q1b. Compute the distance between the two distributions relative to their standard deviation.
+
+```{r Q1_SDT}
+q1a <- qnorm(0.6)
+q1a
+
+q1b <- q1a  + qnorm(0.85)
+q1b
+```
+
+# Q2. Method of Constant Stimuli
+Consider fitting a cumulative normal distribution function to the following data.
+  4%  ( 2/50) at X = -9
+  2%  ( 1/50) at X = -7
+  10% ( 5/50) at X = -5
+  46% (23/50) at X = -3
+  52% (26/50) at X = -1
+  70% (35/50) at X = +1
+  82% (41/50) at X = +3
+  74% (37/50) at X = +5
+  96% (48/50) at X = +7
+  98% (49/50) at X = +9
+A number of trials for each condition of X is 50. There are 500 trials in total.
+The cumulative normal distribution function is defined along the axis of X. The curve is fitted to frequency values of the data.
+Note that the fitted function determines a probability at each value of X. Use a maximum likelihood method for the fitting.
+Report an estimated mean and an estimated standard deviation of the fitted curve.
+```{r Q2_MCS}
+cumulative_normal <- function(params, x, y) {
+  mu <- params[1]
+  sigma <- params[2]
+  p <- 0.5 * (1 + pnorm((x - mu) / sigma, lower.tail = TRUE))
+  -sum(y * log(p) + (1 - y) * log(1 - p))
+}
+
+x_values <- c(-9, -7, -5, -3, -1, 1, 3, 5, 7, 9)
+y_values <- c(2, 1, 5, 23, 26, 35, 41, 37, 48, 49) / 50
+start_params <- c(mean(x_values), sd(x_values))
+
+# Perform MLE
+fit <- optim(par = start_params, fn = cumulative_normal, x = x_values, y = y_values, method = "L-BFGS-B")
+
+estimated_mean <- fit$par[1]
+estimated_sd <- fit$par[2]
+
+cat("Estimated Mean:", estimated_mean, "\n")
+cat("Estimated Standard Deviation:", estimated_sd, "\n")
+```
+
+
+
+
+
