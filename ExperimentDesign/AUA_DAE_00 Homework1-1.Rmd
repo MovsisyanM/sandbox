@@ -1,0 +1,57 @@
+---
+title: "Review of Intro Stat"
+author: "TadamasaSawada, Mher Movsisyan"
+date: "2023-09-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Q1. Standard Error
+(Q1a) The standard deviation represents width of the population. It can be estimated from samples taken from the distribution. The standard error can be also estimated from these samples.
+
+The script (Q1a) estimates the standard deviation of the population from 1000 samples taken from the population. 
+Revise the script so that it computes the standard error from "samples".
+
+(Q1b) Consider a session of taking N samples from the population and computing an average of these samples. If you repeat this sessin for M times, there will be M computed averages from the sessions and these computed average will form a new distribution that is different from the population.
+The standard error represents width of this distribution of the computed averages.
+Namely, the standard error that is estimated from samples from the population (Q1a) is the standard deviation of the distribution of the computed averages.
+
+The script (Q1b) run 1000 sessions of taking 1000 samples from the population and computing an average of these samples (computed_averages). 
+Revise the script so that it computes the standard error from "computed_averages".
+
+Note that the standard errors estimated in (Q1a) and (Q1b) should be close to one another but will be unlikely identical.
+
+
+## (Q1a) Standard Error (SE) estimated from data in a single session
+```{r Standard_Error_1}
+true_std = 100
+
+nSamples = 1000
+samples = rnorm(nSamples, sd=true_std)
+#sd(samples) # Standard Deviation
+
+## Compute SE from "samples"
+sd = sqrt(sum((mean(samples) - samples)**2)/(nSamples - 1))
+sd
+```
+
+## (Q1b) Standard Error (SE) estimated from data in multiple sessions
+```{r Standard_Error_2}
+true_std = 100
+nSessions = 1000
+
+nSamples = 1000
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rnorm(nSamples, sd=true_std)
+  computed_averages[s]= mean(samples)
+}
+
+## Compute SE from "computed_averages"
+sd = sqrt(sum((mean(computed_averages) - computed_averages)**2)/(nSessions - 1))
+sd
+```

@@ -1,0 +1,273 @@
+---
+title: "Midterm"
+author: "TadamasaSawada, Mher Movsisyan"
+date: "2023-10-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+if (!require("ggplot2")) install.packages("ggplot2") 
+library(ggplot2)
+if (!require("car")) install.packages("car") # Anova
+library(car) # Anova
+if (!require("lsmeans")) install.packages("lsmeans")
+library(lsmeans)
+if (!require("ez")) install.packages("ez")
+library(ez)
+```
+
+## Q1. Analysis error 1
+"data_Q1a.txt" and "data_Q1b.txt" are data files of an experiment with three conditions of one factor.
+These two files represent the same data but in two different formats.
+However, the following script shows that results of ANOVA are different between the files. 
+Explain why the results are different and revise the script so that the results of ANOVAs become the same.
+```{r GeneralLinearModel}
+dQ1a = read.delim("data_Q1a.txt", header = TRUE)
+dQ1b = read.delim("data_Q1b.txt", header = TRUE)
+
+print("Data Q1a")
+Anova(lm(Measure ~ Condition, data=dQ1a), type=2)
+print("Data Q1b")
+Anova(lm(Measure ~ Condition, data=dQ1b), type=2)
+```
+
+
+From looking at the output it is clear that the degrees of freedom is different for the Condition variable. Looking at the text files we see that one is encoded numerically while the other alphabetically
+
+```{r GeneralLinearModel}
+dQ1a$Condition <- as.factor(dQ1a$Condition)
+dQ1b$Condition <- as.factor(dQ1b$Condition)
+
+print("Data Q1a")
+Anova(lm(Measure ~ Condition, data=dQ1a), type=2)
+print("Data Q1b")
+Anova(lm(Measure ~ Condition, data=dQ1b), type=2)
+```
+
+By changing the type of the variable to categorical/factor, we solve the issue! (Thanks for this problem, it was interesting)
+
+## Q2. Analysis error 2
+The scripts "Valid_case" below show that a t-test and an ANOVA give the same results when these stat tests are used to compare data in two conditions in "data_Q2a.txt".
+However, this is not the case for the script "Invalid_case" below. Note that "data_Q2a.txt" and "data_Q2b.txt" are the essentially the same data. However, in this script, a t-test and an ANOVA give different results.
+Explain why the results are different and revise the script so that the results of the t-test and the ANOVA become the same.
+```{r Valid_case}
+dQ2a = read.delim("data_Q2a.txt", header = TRUE)
+dQ2a$Subject   = as.factor(dQ2a$Subject)
+dQ2a$Condition = as.factor(dQ2a$Condition)
+
+print("t-test")
+t.test(dQ2a$Measure[dQ2a$Condition=='A'],
+       dQ2a$Measure[dQ2a$Condition=='B'], paired=TRUE)
+print("ANOVA Repeated Measure")
+print(ezANOVA(data = dQ2a, dv=.(Measure), wid=.(Subject), within=.(Condition), type=2, detailed=FALSE))
+```
+
+```{r Invalid_case}
+dQ2b = read.delim("data_Q2b.txt", header = TRUE)
+dQ2b$Subject   = as.factor(dQ2b$Subject)
+dQ2b$Condition = as.factor(dQ2b$Condition)
+
+print("t-test")
+t.test(dQ2b$Measure[dQ2b$Condition=='A'],
+       dQ2b$Measure[dQ2b$Condition=='B'], paired=TRUE)
+print("ANOVA Repeated Measure")
+print(ezANOVA(data = dQ2b, dv=.(Measure), wid=.(Subject), within=.(Condition), type=2, detailed=FALSE))
+```
+In the data we can see that the ordering is different, so we can just sort it
+
+```{r Corrected_case}
+dQ2b = read.delim("data_Q2b.txt", header = TRUE)
+dQ2b <- dQ2b[order(dQ2b$Subject),]
+dQ2b$Subject   = as.factor(dQ2b$Subject)
+dQ2b$Condition = as.factor(dQ2b$Condition)
+
+print("t-test")
+t.test(dQ2b$Measure[dQ2b$Condition=='A'],
+       dQ2b$Measure[dQ2b$Condition=='B'], paired=TRUE)
+print("ANOVA Repeated Measure")
+print(ezANOVA(data = dQ2b, dv=.(Measure), wid=.(Subject), within=.(Condition), type=2, detailed=FALSE))
+```
+
+
+## Q3. Effect of number of levels
+The following script is for a Monte-Carlo simulation that estimates probability of Type-1 error of a 1-way ANOVA.
+The number of conditions is three in the current script. The estimated probability is about 0.05 with this number of conditions.
+Revise the script so that the number of conditions become thirty and run the simulation with the 30 conditions for several times.
+Based on the simulation, discuss how probability of Type-1 error is affected by the number of conditions.
+```{r 1way_ANOVA}
+nSessions = 1000
+numSamples = 10 # number of samples for each condition
+countSignificant = 0
+for(s in 1:nSessions)
+{
+  dQ3 = data.frame( "Measure"   = rnorm(numSamples*3),
+                    "Condition" = rep(seq(3),each=numSamples) )
+  dQ3$Condition = as.factor(dQ3$Condition)
+
+  result = Anova(aov(Measure ~ Condition, data=dQ3), type=2)
+  if(result$`Pr(>F)`[1]<0.05)
+    countSignificant = countSignificant+1
+}
+countSignificant/nSessions # Type-1 error
+```
+
+
+```{r 1way_ANOVA_30}
+nSessions = 1000
+numSamples = 10 # number of samples for each condition
+countSignificant = 0
+for(s in 1:nSessions)
+{
+  dQ3 = data.frame( "Measure"   = rnorm(numSamples*3),
+                    "Condition" = rep(seq(3),each=numSamples) )
+  dQ3$Condition = as.factor(dQ3$Condition)
+
+  result = Anova(aov(Measure ~ Condition, data=dQ3), type=2)
+  if(result$`Pr(>F)`[1]<0.05)
+    countSignificant = countSignificant+1
+}
+countSignificant/nSessions # Type-1 error
+```
+The probability got closer to 0.05, which is logical since we are estimating with more precision
+
+### Q4. Cauchy distribution
+The following script compute (i) 1000 samples from a Cauchy distribution and (ii) 1000 averages of 1000 samples from the Cauchy distribution.
+Revise the script so that it computes 25% and 75% quantiles of (i) the 1000 samples and (ii) the 1000 averages.
+Explain how this result becomes different if a normal distribution is used instead of the Cauchy distribution.
+```{r Normal_probability_plot_Distribution_Average}
+nSamples = 1000
+nSessions = 1000
+
+samples = rcauchy(nSamples,location=0,scale=1) # (i)
+#samples = rnorm(nSamples,mean=0,sd=1)
+
+computed_averages = rep(0,nSessions)  # (ii)
+for(s in 1:nSessions)
+{
+  samples = rcauchy(nSamples,location=0,scale=1)
+  #samples = rnorm(nSamples,mean=0,sd=1)
+  computed_averages[s] = mean(samples)
+}
+
+computed_averages[1:10]
+```
+
+
+
+```{r Normal_probability_plot_Distribution_quantiles}
+nSamples = 1000
+nSessions = 1000
+
+samples = rcauchy(nSamples,location=0,scale=1) # (i)
+#samples = rnorm(nSamples,mean=0,sd=1)
+
+computed_q1 = rep(0,nSessions)  # (ii)
+computed_q3 = rep(0,nSessions)  # (ii)
+for(s in 1:nSessions)
+{
+  samples = rcauchy(nSamples,location=0,scale=1)
+  #samples = rnorm(nSamples,mean=0,sd=1)
+  computed_q1[s] = quantile(samples, 0.25)
+  computed_q3[s] = quantile(samples, 0.75)
+}
+
+computed_q1[1:5]
+computed_q3[1:5]
+
+q1_of_avg <- quantile(computed_averages, 0.25)
+q3_of_avg <- quantile(computed_averages, 0.75)
+
+q1_of_avg
+q3_of_avg
+```
+
+## Q5. CLT and outliers
+The following script compute 1000 averages of 1000 samples from the Cauchy distribution and draw a Normal probability plot from the 1000 averages. As you know, the Cauchy distribution does not satisfy conditions of the Central Limit Theorem. So, the 1000 averages does not become closer to a normal distribution no matter how large the sample size (nSamples) is.
+Add several lines in a specified place in the script so that:
+  Outliers are removed from 1000 samples in each session.
+Note that the outlier is defined in this question as a sample whose distance from an estimated mean is more than 3 times of an estimated standard deviation. Both the estimated mean and the estimated standard deviation are computed from the 1000 samples before removing the outliers in each session.
+Run the revised script several times and report whether this operation removing the outliers makes a distribution of the 1000 averages closer to a normal distribution.
+```{r Normal_probability_plot_Distribution_Average}
+nSamples = 100
+nSessions = 1000
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rcauchy(nSamples,location=0,scale=1)
+  
+  ########################
+  # Q5. Additional lines #
+  ########################
+  
+  computed_averages[s] = mean(samples)
+}
+
+quantile_averages = quantile(computed_averages, probs=c(0.05,0.95))
+qqnorm(computed_averages, pch=19, ylim=c(quantile_averages[1],quantile_averages[2]))
+qqline(computed_averages, col="red") # Passing 25% and 75% quantiles
+```
+Now lets remove the outliers:
+
+```{r Normal_probability_plot_Distribution_Average}
+nSamples = 100
+nSessions = 1000
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rcauchy(nSamples,location=0,scale=1)
+  
+  samples <- samples[samples > mean(samples) - 3*sd(samples)]
+  samples <- samples[samples < mean(samples) + 3*sd(samples)]
+  
+  computed_averages[s] = mean(samples)
+}
+
+quantile_averages = quantile(computed_averages, probs=c(0.05,0.95))
+qqnorm(computed_averages, pch=19, ylim=c(quantile_averages[1],quantile_averages[2]))
+qqline(computed_averages, col="red") # Passing 25% and 75% quantiles
+```
+As we can see, the distribution is a lot closer to a normal distribution
+
+
+
+## Q6. ANOVA 1-sample per cell (Montgomery, 2012, p.205, Example 5.2, Tabel 5.10)
+Data in "data_Q5.txt" are results of an experiment with two factors: FactorA with five levels and FactorB with four levels. There is only one sample in each condition and there are 20 samples in total.
+Complete the following script based on the section "5.3.7 One Observation per Cell" in Montgomery (2012, pp.203-206) and compute two p-values of the main effects of FactorA and FactorB and one p-value of their interaction.
+```{r ANOVA_1_sample}
+dQ6 = read.delim("data_Q6.txt", header = TRUE)
+dQ6$FactorA = as.factor(dQ6$FactorA)
+dQ6$FactorB = as.factor(dQ6$FactorB)
+
+grand_mean = mean(dQ6$Measure)
+
+SSA = sum((tapply(dQ6$Measure, dQ6$FactorA, mean) - grand_mean)^2)
+SSB = sum((tapply(dQ6$Measure, dQ6$FactorB, mean) - grand_mean)^2)
+SSE = sum((dQ6$Measure - tapply(dQ6$Measure, dQ6$FactorA, mean)[dQ6$FactorA] -
+             tapply(dQ6$Measure, dQ6$FactorB, mean)[dQ6$FactorB] + grand_mean)^2)
+
+dfA = length(levels(dQ6$FactorA)) - 1
+dfB = length(levels(dQ6$FactorB)) - 1
+dfE = (length(dQ6$Measure) - 1) - (dfA + dfB)
+
+MSA = SSA / dfA
+MSB = SSB / dfB
+MSE = SSE / dfE
+FA = MSA / MSE
+FB = MSB / MSE
+
+p_value_A = 1 - pf(FA, dfA, dfE)
+p_value_B = 1 - pf(FB, dfB, dfE)
+
+SSAB = SSA - MSA - SSB + grand_mean * grand_mean
+dfAB = dfA * dfB
+MSAB = SSAB / dfAB
+FAB = MSAB / MSE
+
+
+p_value_AB = 1 - pf(FAB, dfAB, dfE)
+cat("P-value for FactorA:", p_value_A, "\n")
+cat("P-value for FactorB:", p_value_B, "\n")
+cat("P-value for Interaction (FactorA*FactorB):", p_value_AB, "\n")
+```
+

@@ -1,0 +1,129 @@
+---
+title: "Homework 2-1"
+author: "TadamasaSawada, Mher Movsisyan"
+date: "2023-09-23"
+output: pdf_document
+---
+
+## Q1. Central Limit Theorem
+The following script of this file show how the Central Limit Theorem works for a non-normal distribution.
+The non-normal distribution is currently a skew-normal distribution ("dsn" and "rsn") with alpha=4.
+
+Before solving questions in this file:
+ Confirm that SE^2 can be estimated from (2a) samples from the distribution and (2b) averages of samples in individual sessions
+ Confirm that (3b) the distribution of averages better fits to a diagonal line in a Normal probability plot than (3a) the original distribution.
+ 
+### Questions
+Q1a: Revise (0) and (1) in the following scripts to replace the skew-normal distribution with the Cauchy distribution with location=0 and scale=1.
+Q1b: Describe the shape of the Cauchy distribution by comparing it with a standard normal distribution (keywords: symmetry, unimodal, tail)
+Q1c: Repeatedly run (2a) and (2b) with changing the sample size ("nSamples") and describe how the estimated SE^2 looks like.
+Q1d: Repeatedly run (3b) with changing the sample size ("nSamples") and describe how the fit in the Normal probability plot changes.
+
+In Q1b,c,d, descriptions are expected to be less than one hundred words.
+The format of the submitted file should be Rmarkdown (.Rmd).
+
+### Answers
+Ans1a: Revise (0) and (1) in the following script.
+Ans1b: The Cauchy distribution is similar to a Gaussian one, as it is bell shaped, unimodal and symmetric, but it has fatter tails.
+Ans1c: The smaller the sample size, the bigger the SE^2
+Ans1d: The smaller the sample size, the less confident we are about the distribution being normal
+
+In Q1b,c,d, descriptions are expected to be less than one hundred words.
+The format of the submitted file should be Rmarkdown (.Rmd).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+if (!require("sn")) install.packages("sn")
+library(sn)
+```
+
+## (0) Distribution of Population
+```{r Distribution_PDF}
+xs = seq(-1,+4,0.05)
+ys = dsn(xs,alpha=4)
+plot(xs,ys, type="l")
+```
+
+
+## (0 altered) Distribution of Population (Cauchy)
+```{r Cauchy_Distribution_PDF}
+ys = rcauchy(10000)
+hist(ys, xlim=c(-4, 4), breaks=100000)
+```
+
+Q1b. Describe the shape of the Cauchy distribution (location=0 and scale=1) by comparing it with a standard normal distribution (keywords: symmetry, unimodal, tail).
+
+## (1) Random number generator
+```{r DistributionX}
+rDistributionX = function(nSamples)
+{
+  samples = rsn(nSamples,alpha=4)
+}
+```
+
+## Histograms of random samples from (1)
+```{r Histogram_Population}
+nSamples = 100
+samples = rDistributionX(nSamples)
+hist(samples, breaks=50)
+```
+
+## Histograms of averages of random samples from (1)
+```{r Histogram_Distribution_Average}
+nSamples = 100
+
+nSessions = 1000
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rDistributionX(nSamples)
+  computed_averages[s] = mean(samples)
+}
+
+hist(computed_averages, breaks = 50)
+```
+
+## (2a) SE^2 estimated from samples
+```{r SE^2_a}
+nSamples = 10
+samples = rDistributionX(nSamples)
+var(samples)/nSamples
+```
+
+## (2b) SE^2 estimated from averages of samples in individual sessions
+```{r SE^2_b}
+nSessions = 10
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rDistributionX(nSamples)
+  computed_averages[s] = mean(samples)
+}
+var(computed_averages)
+```
+Q1c. Repeatedly run (2a) and (2b) with changing the sample size ("nSamples") and describe how the estimated SE^2 looks like.
+
+## (3a) Normal probability plot of populaion
+```{r Plot_Population}
+nSamples = 1000
+samples = rDistributionX(nSamples)
+qqnorm(samples, pch=19)
+qqline(samples, col="red")
+
+#points = qqnorm(samples, pch=19); points_x = points$x[order(points$x)]
+#pnorm(points_x)
+```
+
+## (3b) Normal probability plot of distribution of averages
+```{r Plot_Distribution_Average}
+nSessions = 10
+computed_averages = rep(0,nSessions) 
+for(s in 1:nSessions)
+{
+  samples = rDistributionX(nSamples)
+  computed_averages[s] = mean(samples)
+}
+qqnorm(computed_averages, pch=19)
+qqline(computed_averages, col="red")
+```
+Q1d. Repeatedly run (3b) with changing the sample size ("nSamples") and describe how the fit in the Normal probability plot changes.
