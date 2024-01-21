@@ -29,4 +29,6 @@ def simple_ml_pipeline():
 
 
 if __name__ == "__main__":
+    simple_ml_pipeline = simple_ml_pipeline.with_options(run_name="test_name_{date}_{time}")
+    simple_ml_pipeline.write_run_configuration_template(path='ZenML/config.yaml')
     run = simple_ml_pipeline()
