@@ -1,6 +1,12 @@
 [
   {
     "time": "2024/02/04 23:30:00",
+    "status": "Bad",
+    "category": "physical",
+    "description": "She fell down the main building stairs again -_-"
+  },
+  {
+    "time": "2024/02/04 23:30:00",
     "status": "Normal",
     "category": "physical",
     "description": "She hit her other leg..."
