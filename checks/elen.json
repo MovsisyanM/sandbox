@@ -10,5 +10,11 @@
     "status": "Normal",
     "category": "physical",
     "description": "She hit her other leg..."
+  },
+  {
+    "time": "2024/02/05 13:47:00",
+    "status": "Good",
+    "category": "mental",
+    "description": "She drank coffee and wants to live :)"
   }
 ]
