@@ -16,5 +16,11 @@
     "status": "Good",
     "category": "mental",
     "description": "She drank coffee and wants to live :)"
+  },
+  {
+    "time": "2024/02/09 13:06:00",
+    "status": "Good",
+    "category": "normal",
+    "description": "Skipped class cause she wasn't feeling well, but is okay now and is going to class."
   }
 ]
