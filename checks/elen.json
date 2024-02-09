@@ -22,5 +22,11 @@
     "status": "Normal",
     "category": "physical",
     "description": "Skipped class cause she wasn't feeling well, but is okay now and is going to class."
+  },
+  {
+    "time": "2024/02/09 17:34:00",
+    "status": "Bad",
+    "category": "mental",
+    "description": "Got a weirdo teammate for the group project."
   }
 ]
