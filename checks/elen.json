@@ -45,6 +45,18 @@
     "time": "2024/02/12 13:00:00",
     "status": "Bad",
     "category": "mental",
-    "description": "Pizza concert was overbooked but she wanted to go"
+    "description": "Pizza concert was overbooked but she wanted to go."
+  },
+  {
+    "time": "2024/02/14 23:30:00",
+    "status": "Bad",
+    "category": "physical",
+    "description": "Drank 1908mg of caffeine and a doctor was called."
+  },
+  {
+    "time": "2024/02/14 23:40:00",
+    "status": "Bad",
+    "category": "mental",
+    "description": "Is having one of the worst weeks of her life."
   }
 ]
