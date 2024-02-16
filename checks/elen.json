@@ -58,5 +58,17 @@
     "status": "Bad",
     "category": "mental",
     "description": "Is having one of the worst weeks of her life."
+  },
+  {
+    "time": "2024/02/15 18:40:00",
+    "status": "Bad",
+    "category": "mental",
+    "description": "Proposal to change capstone group got rejected."
+  },
+  {
+    "time": "2024/02/16 13:30:00",
+    "status": "Bad",
+    "category": "physical",
+    "description": "Nosebled"
   }
 ]
