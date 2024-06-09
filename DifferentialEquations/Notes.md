@@ -2,8 +2,24 @@
 ###### Notes by Mher Movsisyan
 
 ---
+### ODE vs PDE
+
+Ordinary differential equations are the ones with one independent variable.  
+Partial differential equations involve many independent variables.
+
+### Euler method
+Also called the fiist order Runge-Kutta method
+
+**GIVEN** initial conditions:
+$y(x_0) = y_0$  
+$\frac{dy}{dx} = f(x, y)$  
+
+Method:
+$$ y_{n+1} = y_n + \Delta x f(x_n, y_n) $$
+
+
 ### Separable first-order equations
-These are the ones where you can drag the y terms on one side and x terms on the other, forming  
+These are the equations where you can drag the y terms on one side and x terms on the other, forming  
 $$g(y)dy = f(x)dx$$  
 
 Solution:
