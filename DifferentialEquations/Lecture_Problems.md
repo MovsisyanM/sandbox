@@ -79,3 +79,17 @@ $$ ln(x) = 1 - \frac{1}{y} $$
 
 $$ \frac{1}{1 - ln(x)} = y $$
 
+
+### Problem 4 (practice quiz):
+
+$$ \frac{dy}{dx} + (sinx)y = 0, \ \ \ \ y(\pi/2) = 1 $$  
+
+$$ \frac{dy}{dx} = -y(sinx) $$
+
+$$ \frac{dy}{-y} = sinxdx $$
+
+$$ ln(y)|_1^y = cosx|_{\pi/2}^x $$
+
+$$ ln(y) = cosx $$
+
+$$ y = e^{cosx} $$
