@@ -44,3 +44,38 @@ $$ \frac{dx}{dt} = x(1 - x), \text{ with } x(0) = x_0 \text{ and } 0 \leq x_0 \l
 $$ \frac{dt}{dx} = \frac{1}{x(1-x)} $$
 
 $$ dt =  \frac{dx}{x(1-x)} $$
+
+$$ dt =  \left(\frac{1}{x} + \frac{1}{1-x}\right)dx $$
+
+$$ dt =  \left.ln(|x|) - ln(|1-x|)\right|_{x_0}^x $$
+
+$$ t =  ln(x) - ln(x_0) + -ln(|x - 1|) + ln(|x_0 - 1|) $$
+
+$$ e^t =  \frac{x|x_0 - 1|}{x_0|x - 1|} $$
+
+
+### Problem 4 (practice quiz):
+
+$$ \frac{dy}{dx} = \sqrt{xy}, \ \ \ \ y(1) = 0 $$
+
+$$ \frac{dy}{dx} = \sqrt{x} \sqrt{y} $$
+
+$$ \frac{dy}{\sqrt{y}} = \sqrt{x}dx $$
+
+$$ \frac{dy}{\sqrt{y}} = \frac{3}{2}x^{3/2} $$
+
+
+### Problem 4 (practice quiz):
+
+$$ y^2 - x\frac{dy}{dx} = 0, \ \ \ \ y(1) = 1 $$
+
+$$ y^2 = x\frac{dy}{dx} $$
+
+$$ \frac{dx}{x} = \frac{dy}{y^2} $$
+
+$$ ln(x)|_1^x = - \left.\frac{1}{y}\right|_1^y $$
+
+$$ ln(x) = 1 - \frac{1}{y} $$
+
+$$ \frac{1}{1 - ln(x)} = y $$
+
