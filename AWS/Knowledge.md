@@ -1,6 +1,8 @@
-
-
+# Amazon Web Services
+###### learning diary by Mher Movsisyan
 ---
+
+2024-06-29: [This video](https://www.youtube.com/watch?v=JIbIYCM48to) was a good quick intro to all the AWS services.
 
 ### Robomaker
 
